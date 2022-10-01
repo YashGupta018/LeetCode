@@ -1,42 +1,29 @@
 class Codec {
 public:
     string serialize(TreeNode* root) {
-        queue<TreeNode*> q;
-        q.push(root);
-        string str;
-        while (!q.empty()) {
-            if (q.front() == nullptr) {
-                str = str + "#,";
-            }
-            else {
-                q.push(q.front()->left);
-                q.push(q.front()->right);
-                str = str + to_string(q.front()->val) + ",";
-            }
-            q.pop();
-        }
-        return str;
+        if (root == nullptr) return "#";
+        return to_string(root->val)+","+serialize(root->left)+","+serialize(root->right);
     }
     TreeNode* deserialize(string data) {
-        TreeNode* root = nullptr;
-        queue<TreeNode**> q;
-        q.push(&root);
-        string::iterator first = data.begin();
-        while (first != data.end()) {
-            TreeNode** pp = q.front();
-            if (*first == '#') {
-                advance(first, 2);
-            }
-            else {
-                string::iterator last = find(first, data.end(), ',');
-                int val = stoi(string(first, last));
-                *pp = new TreeNode(val);
-                q.push(&((*pp)->left));
-                q.push(&((*pp)->right));
-                first = next(last);
-            }
-            q.pop();
+        return mydeserialize(data);
+    }
+    TreeNode* mydeserialize(string& data) {
+        if (data[0]=='#') {
+            if(data.size() > 1) data = data.substr(2);
+            return nullptr;
         }
-        return root;
+        else {
+            TreeNode* node = new TreeNode(helper(data));
+            node->left = mydeserialize(data);
+            node->right = mydeserialize(data);
+            return node;
+        }
+    }
+private:
+    int helper(string& data) {
+        int pos = data.find(',');
+        int val = stoi(data.substr(0,pos));
+        data = data.substr(pos+1);
+        return val;
     }
 };
