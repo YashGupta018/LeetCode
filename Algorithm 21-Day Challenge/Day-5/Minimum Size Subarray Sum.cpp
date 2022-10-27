@@ -6,7 +6,7 @@ public:
             s -= A[j];
             while (s <= 0) {
                 res = min(res, j - i + 1);
-                s += A[i--];
+                s += A[i++];
             }
         }
         return res % (n + 1);
