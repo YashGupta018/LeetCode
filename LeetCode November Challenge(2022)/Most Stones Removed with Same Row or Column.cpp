@@ -13,7 +13,8 @@ public:
         vector<bool>visited(n,0);
         int result=0;
         for(int i=0;i<n;i++) {
-            if(visited[i]){continue;
+            if(visited[i]) {
+                continue;
             }
             result+=dfs(stones,i,visited,n);
         }
