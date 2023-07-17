@@ -3,5 +3,6 @@
   "editor.formatOnSave": false,
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
-  }
+  },
+  "discord.enabled": true
 }
