@@ -4,5 +4,9 @@
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
   },
-  "discord.enabled": true
+  "discord.enabled": true,
+  "files.associations": {
+    "vector": "cpp",
+    "iosfwd": "cpp"
+  }
 }
